@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .con {
+            display: flex;
+            width: 400px;
+            height: 300px;
+            background-color: cadetblue;
+            color: black;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            margin: auto;
+            margin-top: 70px;
+            border-radius: 20px;
+        }
+
+        h3 {
+            position: relative;
+            top: -90px;
+            
+        }
+
+        .joke {
+            position: relative;
+            top: -50px;
+            color: tan;
+            padding: 13px;
+            font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+            font-weight: 400;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="con">
+        <h3>Welcome</h3>
+        <div class="joke" id="joke">Awosem jokes</div>
+        <button id="jbtn" class="btn">Next Jokes</button>
+    </div>
+
+    <script>
+
+        //promise => 2 condion ya hoga ya nhi hoga 
+        //  GET https://icanhazdadjoke.com/
+
+        const jokes = document.querySelector('#joke');
+        const jokebtn = document.querySelector('#jbtn');
+
+        const generateJokes = () => {
+
+            const setHeader = {
+                headers: {
+                    Accept: "application/json"
+                }
+            }
+            fetch('https://icanhazdadjoke.com', setHeader)
+                .then((res) =>  res.json() )
+                .then((data) => {
+                    jokes.innerHTML = data.joke
+                }).catch((error) => {
+                    console.log("error" + error);
+                })
+        }
+
+        jokebtn.addEventListener('click', generateJokes);
+        generateJokes();
+
+    </script>
+</body>
+
+</html>
